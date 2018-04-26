@@ -1,0 +1,68 @@
+<?php $mapping_types = array(1=>'self::HAS_ONE',2=>'self::BELONGS_TO',3=>'self::HAS_MANY',4=>'self::MANY_TO_MANY'); ?>
+<{$php}>
+
+namespace <{$M_name}>\Model;
+
+<if condition="in_array('tree',$comment['types'])">
+use Common\Model\TreeModel;
+
+class <{$model_name}>Model extends TreeModel{
+    <else />
+use Common\Model\BaseModel;
+
+class <{$model_name}>Model extends BaseModel{
+</if>
+    protected $_validate= array(
+
+    );
+    protected $_auto = array (
+    <foreach name="comment['field']" item="row" key="k" >
+        <if condition="$row['type'] eq 'imgs'">
+            array('<{$k}>','json_encode',3,'function'),
+            <elseif condition="$row['type'] eq 'time'"/>
+            array('<{$k}>','strtotime',2,'function'),
+        </if>
+    </foreach>
+    );
+    protected $_link = array(
+<volist name="relation" id="row">
+        '<{:upper($tables[$row['relation_table']]['table'])}>'=>array(
+            'mapping_type'  =><{$mapping_types[$row['type']]}>,
+            'class_name'         => '<{:upper($tables[$row['relation_table']]['table'])}>',
+    <if condition="$row['type']==1">
+            'foreign_key'        => '<{$row['relation_field']}>',
+            'as_fields'          =>null,
+            'mapping_name'       =>'<{:upper($tables[$row['relation_table']]['table'])}>',
+        <elseif condition="$row['type']==2"/>
+            'foreign_key'        => '<{$row['main_field']}>',
+            'as_fields'          =>null,
+            'mapping_name'       =>'<{:upper($tables[$row['relation_table']]['table'])}>',
+        <elseif condition="$row['type']==3"/>
+            'foreign_key'        => '<{$row['relation_field']}>',
+            'parent_key'         =>null,
+            'mapping_fields'          =>null,
+            'mapping_order'      =>'id DESC',
+            'mapping_limit'      =>'<{:C('PAGE_SIZE')}>',
+            'mapping_name'       =>'<{:upper($tables[$row['relation_table']]['table'])}>',
+        <elseif condition="$row['type']==4"/>
+            'foreign_key'        => '<{$row['main_field']}>',
+            'relation_foreign_key'  => '<{$row['relation_field']}>',
+            'relation_table'  => '__<{:strtoupper($tables[$row['indirect_table']]['table'])}>__',
+            'mapping_name'       =>'<{:upper($tables[$row['indirect_table']]['table'])}>',
+            'mapping_order'      =>'id DESC',
+            'mapping_limit'      =>'<{:C('PAGE_SIZE')}>',
+    </if>
+            'condition'         =>'`status`>0',
+            'relation_tb'       => '<{$tables[$row['relation_table']]['table']}>',
+            'relation_alias'       => '<{$tables[$row['relation_table']]['alias']}>',
+            'relation_field'       =>'<{$row['relation_field']}>',
+            'main_table'         => '<{$tables[$row['main_table']]['table']}>',
+            'main_field'         =>'<{$row['main_field']}>',
+            'main_alias'         =>'<{$tables[$row['main_table']]['alias']}>'
+    ),
+</volist>
+    );
+
+
+
+}

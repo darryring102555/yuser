@@ -1,0 +1,11 @@
+<{$php}>
+
+namespace <{$M_name}>\Controller;
+
+class <{$C_name}>Controller extends BaseController {
+    protected $title = "<{$title}>";
+    <if condition="!$mustLogin">
+        protected $mustVerify = false;
+    </if>
+    <block name="countent"></block>
+}

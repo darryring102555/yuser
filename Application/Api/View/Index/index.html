@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>接口示例</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+        table{
+            width: 100%;
+            border-width: 1px medium medium 1px;
+            border-style: solid none none solid;
+            border-color: #CDCDCD -moz-use-text-color -moz-use-text-color #CDCDCD;
+            -moz-border-top-colors: none;
+            -moz-border-right-colors: none;
+            -moz-border-bottom-colors: none;
+            -moz-border-left-colors: none;
+            border-image: none;
+            background: #FFF none repeat scroll 0% 0%;
+            border-spacing: 0px;
+            line-height: 30px;
+            font-size: 12px;
+            font: 14px/22px "Microsoft Yahei",Tahoma,"SimSun";
+            color: #666;
+        }
+        table th{
+            line-height: 40px;
+            background: #EFEFEF none repeat scroll 0% 0%;
+            line-height: 30px;
+            height: 30px;
+            font-weight: normal;
+            border-right: 1px solid #CDCDCD;
+            border-bottom: 1px solid #CDCDCD;
+            padding: 0px;
+        }
+        table td{
+            line-height: 30px;
+            text-align: left;
+            padding-left: 10px;
+            border-right: 1px solid #CDCDCD;
+            border-bottom: 1px solid #CDCDCD;
+        }
+        .content{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<h1 style="text-align: center">欢迎使用接口测试工具</h1>
+<div id="content"></div>
+<br />
+<button class="add">添加参数</button>
+<button class="reset">置空</button>
+<button class="submit">提交</button>
+
+<form method="get" id="api" action="/index.php/" target="_blank">
+    <input type="hidden" name="params" value="">
+</form>
+<p><b>响应说明:</b>　<button id="look">查看</button></p>
+<div id="result"></div>
+ <br />
+<br />
+<br />
+<br />
+<br />
+<script id="table" type="text/html">
+    <div>
+        选择接口分类:
+        <select name="tool_classify">
+            {{each data as row i}}
+            <option value="{{i}}" {{if i==select[0]}}selected="selected"{{/if}}>{{row.type}}</option>
+            {{/each}}
+        </select>&nbsp;&nbsp;&nbsp;&nbsp;选择接口
+        <select name="tool_interface">
+            {{each data[select[0]]['interface'] as row i}}
+                <option value="{{i}}" {{if i==select[1]}}selected="selected"{{/if}}>{{row.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <form id="tb">
+    <table class="table table-hover table-bordered" data-num="{{data[select[0]]['interface'][select[1]]['params'].length}}">
+        <tr>
+            <th>选项</th>
+            <th colspan="2">内容</th>
+            <th>说明</th>
+        </tr>
+        <tr>
+            <td>API请求地址</td>
+            <td id="interface-url" data-url="{{data[select[0]]['interface'][select[1]]['url']}}">/index.php/{{data[select[0]]['interface'][select[1]]['url']}}</td>
+            <td>
+                提交类型: <input name="tool_m_type" type="radio"
+                    {{if data[select[0]]['interface'][select[1]]['method']!='post'}}
+                        checked="checked"
+                    {{/if}}
+                value="get">GET
+                <input name="tool_m_type" type="radio"
+                {{if data[select[0]]['interface'][select[1]]['method']=='post'}}
+                checked="checked"
+                {{/if}} value="post">POST　
+                <input name="tool_json" type="checkbox"
+                {{if data[select[0]]['interface'][select[1]]['paramsjson']}}
+                checked="checked"
+                {{/if}} value="1">是否将参数json化　
+                <input name="tool_jsonp" type="checkbox"
+                {{if data[select[0]]['interface'][select[1]]['jsonp']}}
+                checked="checked"
+                {{/if}} value="1">是否jsonp请求
+            </td>
+            <td>描述:{{#data[select[0]]['interface'][select[1]]['description']}}</td>
+        </tr>
+        {{each data[select[0]]['interface'][select[1]]['params'] as row i}}
+        <tr>
+            <td>参数</td>
+            <td>参数变量名: <input name="p_name[]" disabled="disabled" type="text" value="{{row.name}}"> -->{{row.info}}</td>
+            <td>参数变量值: <input name="p_value[]" type="text" value="{{row.example}}"></td>
+            <td>{{if row.required}}必填{{else}}选填{{/if}}:{{row.type}}</td>
+        </tr>
+        {{/each}}
+    </table>
+    </form>
+</script>
+
+<script id="tr" type="text/html">
+    <tr>
+            <td>参数</td>
+            <td>参数变量名: <input name="p_name[]" type="text" value=""></td>
+            <td>参数变量值: <input name="p_value[]" type="text" value=""></td>
+            <td>输入参数的键值对</td>
+    </tr>
+</script>
+<script id="result-tab" type="text/html">
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>属性</th>
+            <th>层级</th>
+            <th>类型</th>
+            <th>说明</th>
+            <th>值</th>
+
+        </tr>
+        {{each data as row i}}
+        <tr>
+            <td>{{row.deep | deep}}{{row.k}}</td>
+            <td>{{row.deep-1}}</td>
+            <td>{{row.type}}</td>
+            <td>{{ruesult_info[row.key]}}</td>
+            <td>{{row.value}}</td>
+        </tr>
+        {{/each}}
+    </table>
+
+</script>
+<script src="__TOOLJS__jquery/2.1.4/jquery.min.js"></script>
+<script src="__TOOLJS__artTemplate/3.0.0/template.min.js"></script>
+<script src="__JS__Api/Index/interface.js"></script>
+<script src="__JS__Api/Index/index.js"></script>
+</body>
+</html>

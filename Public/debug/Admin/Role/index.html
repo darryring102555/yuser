@@ -1,0 +1,196 @@
+<div class="ts-container">
+
+    <section class="content-header">
+        <h1>
+            角色
+            <small>列表</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{'U' | F:'Index/index'}}"><i class="fa fa-users"></i> 用户管理</a></li>
+            <li><a href="{{'U' | F:'index'}}"><i class="fa fa-users"></i> 权限管理</a></li>
+            <li class="active">Data tables</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- /.box -->
+                <div class="box">
+                    <div class="box-header row">
+                        <div class="col-sm-12">
+                            <h3 class="box-title">筛选条件</h3>
+                            <a class="btn btn-sm btn-default pull-right" href="{{'U' | F:'edit'}}">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                添加角色 </a>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="dataTables_wrapper form-inline dt-bootstrap" id="example1_wrapper">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div id="example1_length" class="dataTables_length">
+                                        <form action="" method="get">
+                                            <select class="ts-search-field form-control input-sm">
+                                                <option value="id">角色id</option>
+                                                <option value="name">名称</option>
+                                                <option value="description">描述</option>
+                                                <option value="ctime">创建时间</option>
+                                                <option value="utime">修改时间</option>
+                                                <option value="status">状态</option>
+                                            </select>
+                                            <select class="ts-search-type  form-control input-sm" name="where[id][0]">
+                                                <option value="eq">=</option>
+                                                <option value="gt">&gt;</option>
+                                                <option value="lt">&lt;</option>
+                                                <option value="like">像</option>
+                                            </select>
+                                            <input name="where[id][1]" class="form-control input-sm ts-search-value"
+                                                   placeholder="请输入搜索关键字" value="" type="search">
+                                            <button class="btn btn-sm btn-default ts-search-clear" type="button">
+                                                <i class="glyphicon glyphicon-repeat"></i>清空
+                                            </button>
+                                            <button class="btn btn-sm btn-primary ts-search" type="button">
+                                                <i class="glyphicon glyphicon-search"></i>搜索
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <form action="" method="get" class="data-list">
+                                        <table class="table table-hover table-bordered table-striped">
+                                            <tr class="active">
+                                                <th style="width: 30px;"><input class="select-all" type="checkbox"
+                                                                                value=""></th>
+                                                <th data-filed="id" class="ts-order"
+                                                    data-order="{{if order.id!='desc'}}desc{{else}}asc{{/if}}">
+                                                    角色id <a>{{if order.id=='desc'}}▼{{else}}▲{{/if}}</a>
+                                                </th>
+                                                <th data-filed="name" class="ts-order"
+                                                    data-order="{{if order.name!='desc'}}desc{{else}}asc{{/if}}">
+                                                    名称 <a>{{if order.name=='desc'}}▼{{else}}▲{{/if}}</a>
+                                                </th>
+                                                <th data-filed="description" class="ts-order"
+                                                    data-order="{{if order.description!='desc'}}desc{{else}}asc{{/if}}">
+                                                    描述 <a>{{if order.description=='desc'}}▼{{else}}▲{{/if}}</a>
+                                                </th>
+                                                <th data-filed="ctime" class="ts-order"
+                                                    data-order="{{if order.ctime!='desc'}}desc{{else}}asc{{/if}}">
+                                                    创建时间 <i class="glyphicon glyphicon-time"></i>
+                                                    <a>{{if order.ctime=='desc'}}▼{{else}}▲{{/if}}</a>
+                                                </th>
+                                                <th data-filed="utime" class="ts-order"
+                                                    data-order="{{if order.utime!='desc'}}desc{{else}}asc{{/if}}">
+                                                    修改时间 <i class="glyphicon glyphicon-time"></i>
+                                                    <a>{{if order.utime=='desc'}}▼{{else}}▲{{/if}}</a>
+                                                </th>
+                                                <th data-filed="status" class="ts-order"
+                                                    data-order="{{if order.status!='desc'}}desc{{else}}asc{{/if}}">
+                                                    状态 <a>{{if order.status=='desc'}}▼{{else}}▲{{/if}}</a>
+                                                </th>
+                                                <th style="width: 125px">操作</th>
+                                            </tr>
+                                            {{each list as row i}}
+                                            <tr>
+                                                <td><input name="id[]" type="checkbox" value="{{row.id}}"></td>
+                                                <td>
+                                                    {{row.id}}
+                                                </td>
+                                                <td>
+                                                    {{row.name}}
+                                                </td>
+                                                <td>
+                                                    {{row.description}}
+                                                </td>
+                                                <td>
+                                                    {{'dateFormat' | F:row.ctime,'yyyy-MM-dd hh:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{'dateFormat' | F:row.utime,'yyyy-MM-dd hh:mm:ss'}}
+                                                </td>
+                                                <td>
+                                                    {{if row.status<1}}
+                                                    <span class="label label-default">已删除</span>
+                                                    {{else if row.status==1}}
+                                                    <span class="label label-primary">正常</span>
+                                                    {{else}}
+                                                    <span class="label label-warning">其它</span>
+                                                    {{/if}}
+                                                <td>
+                                                <button class="btn btn-xs btn-success user-list" type="button"
+                                                        data-id="{{row.id}}">
+                                                    <i class="glyphicon glyphicon-search"></i>
+                                                </button>
+                                                &nbsp;
+                                                <a class="btn btn-xs btn-info"
+                                                       href="{{'U' | F:'edit'}}?id={{row.id}}" role="button">
+                                                        <i class="glyphicon glyphicon-edit"></i>
+                                                    </a>
+                                                    &nbsp;
+                                                    <button class="btn btn-xs btn-danger ts-remove" type="button"
+                                                            id="{{row.id}}">
+                                                        <i class="glyphicon glyphicon-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            {{/each}}
+                                        </table>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-danger btn-sm ts-remove-select" type="button">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                        删除选中
+                                    </button>
+                                    <button class="btn btn-sm btn-success ts-refresh" data-loading-text="Loading..."
+                                            type="button">
+                                        <i class="glyphicon glyphicon-refresh"></i>
+                                        刷新
+                                    </button>
+                                    {{include './page'}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+
+</div>
+        <script type="text/html" id="userList">
+            <div class="box">
+                <div class="box-body">
+                    <table class="table table-hover table-bordered table-striped">
+                        <tr class="active">
+                            <th>用户名</th>
+                            <th>姓名</th>
+                        </tr>
+                        {{$1}}if list.length{{$2}}
+                        {{$1}}each list as row i{{$2}}
+                        <tr>
+                            <td>{{$1}}row.uname{{$2}}</td>
+                            <td>{{$1}}row.name{{$2}}</td>
+                        </tr>
+                        {{$1}}/each{{$2}}
+                        {{$1}}else{{$2}}
+                        <tr>
+                            <td colspan="2">暂时还没有成员</td>
+                        </tr>
+                        {{$1}}/if{{$2}}
+                    </table>
+                </div>
+            </div>
+
+        </script>

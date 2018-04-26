@@ -1,0 +1,24 @@
+/*按钮*/
+.btn_blue{display: inline-block;background: #89ca29;color: white;height: 25px;line-height: 25px;padding: 0 15px}
+/*speechbox_add*/
+.speechbox_add{width: 700px;}
+.speechbox_add .uploadBox{width: 700px}
+.speechbox_add .uploadBox p{color: #686868;padding:2px 0}
+.speechbox_add .upload_area{width:210px;border: 1px #d5d5d5 solid; float: left;margin-right: 10px;}
+.speechbox_add .upload_area .uImg{float: left;display: inline;width: 104px;height: 144px;overflow: hidden;position: relative;background:#f6f6f6 url('icon_upload_smallHover.png') no-repeat center center;}
+.speechbox_add .upload_area .uImg img{width: 104px;height: 144px}
+.speechbox_add .upload_area .uImg .op{border:1px #d5d5d5 dotted;display: block;width:102px;height:142px}
+.speechbox_add .upload_area .uImg1 .op{width: 208px;height: 291px}
+.speechbox_add .upload_area .uImg1{width: 210px;height: 293px;margin-right: 5px;background-image:url('icon_upload_bigHover.png');}
+.speechbox_add .upload_area .uImg1 img{width: 210px;height:293px}
+.speechbox_add .upload_area .uImg3{margin-top: 5px}
+.speechbox_add .upload_area .inputFile{font-size:115px;cursor: pointer;opacity:0;filter:alpha(opacity=0);position: absolute;right: 0;top: 0}
+.speechbox_add .upload_area .uImg1 .inputFile{font-size:240px;}
+.speechbox_add .uploadBox .upload_area .hover{background-image:url('icon_upload_smallHover.png');}
+.speechbox_add .uploadBox .upload_area .uImg1.hover{background-image:url('icon_upload_bigHover.png');}
+.speechbox_add .upload_area_op{}
+.speechbox_add .upload_area .op_2{position: absolute;right:5px;bottom:5px;background: white;border:1px #d9d9d9 solid;border-radius: 1px;padding:3px 5px;color: #d9d9d9}
+.speechbox_add .upload_area .op_2 a{display: inline-block;color: #444;position: relative;margin: 0 4px}
+.speechbox_add .upload_area .op_2 a.del{width: 12px}
+.speechbox_add .upload_area .op_2 .i_icon_10{top:-11px;left:-2px}
+.speechbox_add .upload_area .op_2 object{vertical-align: middle}

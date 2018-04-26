@@ -1,0 +1,1 @@
+TS.addLink(["bootstrap"]),define(["jquery","template","common"],function(a,b,c){function e(){for(var a in d)d[a]()}var d={};return c.onclick("form .create",function(){var a=this.parents("form");this.ajax(a.attr("action"),function(a){c.alt(a)},a.serialize(),"post")}),{init:e}});

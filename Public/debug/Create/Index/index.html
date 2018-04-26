@@ -1,0 +1,119 @@
+<div class="ts-container">
+    <section class="content-header">
+        <h1>
+            创建代码
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 创建代码</a></li>
+            <li><a href="#"><i class="fa fa-mouse-pointer"></i> 创建代码</a></li>
+            <li class="active">Data tables</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- /.box -->
+                <div class="box">
+                    <div class="box-header row">
+                        <div class="col-sm-12">
+                            <h1 style="text-align: center">欢迎使用代码生成工具</h1>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="dataTables_wrapper form-inline dt-bootstrap" id="example1_wrapper">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div id="example1_length" class="dataTables_length">
+                                        <form action="{{'U' | F:'create'}}" method="get">
+                                            <table class="table table-hover table-bordered">
+                                                <tr>
+                                                    <th>选项</th>
+                                                    <th>值</th>
+                                                    <th>说明</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>模块名</td>
+                                                    <td><input name="m_name" type="text"></td>
+                                                    <td>必填:用于代码生成路径</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>控制器名</td>
+                                                    <td><input name="c_name" type="text"></td>
+                                                    <td>必填:用于代码生成路径及Controller文件;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>方法名</td>
+                                                    <td><input name="a_name" type="text" value="index"></td>
+                                                    <td>必填:用于代码生成路径及生成前端js,文件等</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>数据表名</td>
+                                                    <td><input name="t_name" type="text"></td>
+                                                    <td>必填:用于获取数据表信息(不需要前缀)</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>title</td>
+                                                    <td><input name="title" type="text" value=""></td>
+                                                    <td>选填:页面的二级title</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>是否必须登录才能访问:</td>
+                                                    <td>
+                                                        <input type="radio" name="mustLogin" checked="checked" value="1">&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input type="radio" name="mustLogin" value="0">&nbsp;否</td>
+                                                    <td>选填:添加,修改数据时验证数据</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>是否创建数据MODEL类:</td>
+                                                    <td>
+                                                        <input type="radio" name="model" checked="checked" value="1">&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input type="radio" name="model" value="0">&nbsp;否</td>
+                                                    <td>选填:选择是否生成Model类</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>是否创建前端model处理数据:</td>
+                                                    <td>
+                                                        <input type="radio" name="proscenium_model" value="1">&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input type="radio" name="proscenium_model" checked="checked" value="0">&nbsp;否</td>
+                                                    <td>选填:生成前端model在前端处理数据</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>是否前端验证字段:</td>
+                                                    <td>
+                                                        <input type="radio" name="validata" value="1">&nbsp;是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        <input type="radio" name="validata" checked="checked" value="0">&nbsp;否</td>
+                                                    <td>选填:添加或修改数据时前端验证字段</td>
+                                                </tr>
+                                            </table>
+                                            <br />
+                                            <div style="text-align: center">
+                                                <button type="button" class="btn btn-primary btn-large create">生成</button>
+                                                <button type="reset" class="btn btn-info btn-large">重置</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </section>
+</div>
+
+
+
+
+
+
+
+
+
+

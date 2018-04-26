@@ -1,0 +1,207 @@
+<div class="ts-container">
+<section class="content-header">
+    <h1>
+        前台用户
+        <small>列表</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-users"></i> 用户管理</a></li>
+        <li><a href="{{'U' | F:'Admin/User/index'}}"><i class="fa fa-user"></i> 会员列表</a></li>
+        <li class="active">Data tables</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header row">
+                    <div class="col-sm-12">
+                        <h3 class="box-title">筛选条件</h3>
+                        <a class="btn btn-sm btn-default pull-right" href="{{'U' | F:'edit'}}">
+                            <i class="glyphicon glyphicon-plus"></i>
+                          添加用户
+                        </a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="dataTables_wrapper form-inline dt-bootstrap" id="example1_wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="example1_length" class="dataTables_length">
+                                    <form action="" method="get">
+                                        <select class="ts-search-field form-control input-sm">
+                                            <option value="id">用户id</option>
+                                            <option value="uname">用户名</option>
+                                            <option value="password">密码</option>
+                                            <option value="name">姓名</option>
+                                            <option value="email">电子邮箱</option>
+                                            <option value="head_portrait">头像</option>
+                                            <option value="key">随机数key</option>
+                                            <option value="type">用户类型</option>
+                                            <option value="utime">修改时间</option>
+                                            <option value="ip">登录IP地址</option>
+                                            <option value="integral">用户积分</option>
+                                            <option value="status">状态</option>
+                                        </select>
+                                        <select class="ts-search-type form-control input-sm" name="where[id][0]">
+                                            <option value="eq">=</option>
+                                            <option value="gt">&gt;</option>
+                                            <option value="lt">&lt;</option>
+                                            <option value="like">像</option>
+                                        </select>
+                                        <input name="where[id][1]" class="form-control input-sm ts-search-value" placeholder="请输入搜索关键字" value=""
+                                               type="search">
+                                        <input type="hidden" name="where[uname][0]" value="eq">
+                                        <input name="where[uname][1]" class="form-control input-sm" placeholder="请输入用户名" value=""
+                                               type="search">
+                                        <input type="hidden" name="where[ctime][0]" value="between">
+                                        <input name="where[ctime][1][0]" value="" id="ctime-start"
+                                               class="form-control input-sm" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'ctime-end\')}'})"
+                                               placeholder="开始日期" type="search">
+                                        <input name="where[ctime][1][1]" value="" id="ctime-end"
+                                               class="form-control input-sm" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'ctime-start\')}'})"
+                                               placeholder="结束日期" type="search">
+                                        <button class="btn btn-sm btn-default ts-search-clear" type="button">
+                                            <i class="glyphicon glyphicon-repeat" ></i>清空
+                                        </button>
+                                        <button class="btn btn-sm btn-primary ts-search" type="button">
+                                            <i class="glyphicon glyphicon-search" ></i>搜索
+                                        </button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form action="" method="get" class="data-list">
+                                    <table class="table table-hover table-bordered table-striped">
+                                        <tr class="active">
+                                            <th style="width: 30px;"><input class="select-all" type="checkbox" value=""></th>
+                                            <th data-filed="id" class="ts-order"
+                                                data-order="{{if order.id!='desc'}}desc{{else}}asc{{/if}}">
+                                                用户id <a>{{if order.id=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="uname" class="ts-order"
+                                                data-order="{{if order.uname!='desc'}}desc{{else}}asc{{/if}}">
+                                                用户名 <a>{{if order.uname=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="name" class="ts-order"
+                                                data-order="{{if order.name!='desc'}}desc{{else}}asc{{/if}}">
+                                                姓名 <a>{{if order.name=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="email" class="ts-order"
+                                                data-order="{{if order.email!='desc'}}desc{{else}}asc{{/if}}">
+                                                电子邮箱 <i class="glyphicon glyphicon-envelope"></i> <a>{{if order.email=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="type" class="ts-order"
+                                                data-order="{{if order.type!='desc'}}desc{{else}}asc{{/if}}">
+                                                用户类型 <a>{{if order.type=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="ctime" class="ts-order"
+                                                data-order="{{if order.ctime!='desc'}}desc{{else}}asc{{/if}}">
+                                                <i class="glyphicon glyphicon-time"></i>
+                                                创建时间 <a>{{if order.ctime=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="utime" class="ts-order"
+                                                data-order="{{if order.utime!='desc'}}desc{{else}}asc{{/if}}">
+                                                <i class="glyphicon glyphicon-time"></i>
+                                                修改时间 <a>{{if order.utime=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="ip" class="ts-order"
+                                                data-order="{{if order.ip!='desc'}}desc{{else}}asc{{/if}}">
+                                                登录IP地址 <a>{{if order.ip=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="integral" class="ts-order"
+                                                data-order="{{if order.integral!='desc'}}desc{{else}}asc{{/if}}">
+                                                用户积分 <a>{{if order.integral=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="status" class="ts-order"
+                                                data-order="{{if order.status!='desc'}}desc{{else}}asc{{/if}}">
+                                                状态 <a>{{if order.status=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th style="width: 90px">操作</th>
+                                        </tr>
+                                        {{each list as row i}}
+                                        <tr>
+                                            <td><input name="id[]" type="checkbox" value="{{row.id}}"></td>
+                                            <td>
+                                                {{row.id}}
+                                            </td>
+                                            <td>
+                                                {{row.uname}}
+                                            </td>
+                                            <td>
+                                                {{row.name}}
+                                            </td>
+                                            <td>
+                                                {{row.email}}
+                                            </td>
+                                            <td>
+                                                {{row.type}}
+                                            </td>
+                                            <td>
+                                                {{'dateFormat' | F:row.ctime,'yyyy-MM-dd hh:mm:ss'}}
+                                            </td>
+                                            <td>
+                                                {{'dateFormat' | F:row.utime,'yyyy-MM-dd hh:mm:ss'}}
+                                            </td>
+                                            <td>
+                                                {{row.ip}}
+                                            </td>
+                                            <td>
+                                                {{row.integral}}
+                                            </td>
+                                            <td>
+                                                {{if row.status<1}}
+                                                <span class="label label-default">已删除</span>
+                                                {{else if row.status==1}}
+                                                <span class="label label-primary">正常</span>
+                                                {{else if row.status==2}}
+                                                <span class="label label-info">未激活</span>
+                                                {{else}}
+                                                <span class="label label-warning">禁用</span>
+                                                {{/if}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-xs btn-info" href="{{'U' | F:'edit'}}?id={{row.id}}"
+                                                   role="button"><i class="glyphicon glyphicon-edit"></i></a>
+                                                &nbsp;&nbsp;
+                                                <button class="btn btn-xs btn-danger ts-remove" type="button" id="{{row.id}}"><i class="glyphicon glyphicon-trash" ></i></button>
+
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-danger btn-sm ts-remove-select" type="button">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    删除选中
+                                </button>
+                                <button class="btn btn-sm btn-success ts-refresh" data-loading-text="Loading..." type="button">
+                                    <i class="glyphicon glyphicon-refresh"></i>
+                                    刷新
+                                </button>
+                                {{include './page'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+</div>
+
+

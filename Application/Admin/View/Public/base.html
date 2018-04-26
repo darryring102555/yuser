@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <title>{$title}</title>
+    <link href="__APP__reset.css" rel="stylesheet">
+    <link href="__TOOLJS__bootstrap/3.3.5/bootstrap.min.css" rel="stylesheet">
+    <link href="__JS__Admin/Public/css/font-awesome.css" rel="stylesheet">
+    <link href="__JS__Admin/Public/css/ionicons.css" rel="stylesheet">
+    <link href="__JS__Public/css/AdminLTE.min.css" rel="stylesheet">
+    <link href="__JS__Public/css/_all-skins.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/ace/assets/css/font-awesome.min.css" />
+    <volist name="css" id="vo">
+    <link href="{$vo}.css" rel="stylesheet">
+    </volist>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<script src="__JS__Admin/Public/html5shiv.js"></script>
+<script src="__JS__Admin/Public/respond.js"></script>
+<block name="top"></block>
+<block name="sidebar"></block>
+<block name="coutent">
+    <div id="coutent"></div>
+</block>
+<block name="footer"></block>
+<script>
+    var data = {$data};
+</script>
+<script src="__TOOLJS__requirejs/2.1.18/require.min.js"
+                    data-main="__APP__main.js?time={$stitacEdition}"
+                    module-name="{$Think.MODULE_NAME}"
+                    controller-name="{$Think.CONTROLLER_NAME}"
+                    action-name="{$Think.ACTION_NAME}"
+                    edition="{$stitacEdition}"
+                    var-model = "{:C('VAR_MODULE')}"
+                    var-controller = "{:C('VAR_CONTROLLER')}"
+                    var-action = "{:C('VAR_ACTION')}"
+                    id="entrance"
+                    debug="{$Think.APP_DEBUG}"
+                    hand-data=""
+                    data-name="data"
+                    target="coutent"
+                    defer async="true">
+</script>
+
+
+</body>
+</html>

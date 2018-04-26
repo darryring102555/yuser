@@ -1,0 +1,4 @@
+# 项目计划任务 #
+
+#每两个小时清理一次未过期未激活的注册用户
+* */2 * * * cd /data/html/1905_micro_ticket_web && /usr/local/m1905/php/bin/php index.php /Cron/User/clearUser

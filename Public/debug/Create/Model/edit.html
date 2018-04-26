@@ -1,0 +1,103 @@
+<div class="ts-container">
+    <section class="content-header">
+        <h1>
+            模型关系
+            <small>信息编辑</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{'U' | F:'Index/index'}}"><i class="fa fa-dashboard"></i> 创建代码</a></li>
+            <li><a href="{{'U' | F:'index'}}"><i class="fa fa-gg"></i> 模型结构</a></li>
+            <li><a href="#"><i class="fa {{data['id'] ? 'fa-edit': 'fa-plus' }}"></i> {{data['id'] ? '修改': '添加' }}模型关系</a></li>
+            <li class="active">Data row</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <i class="ion ion-clipboard"></i>
+
+                        <h3 class="box-title">编辑表单</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <form class="form-horizontal" action="{{'U' | F:'doEdit'}}" id="edit" method="get">
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">主表ID：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="main_table" class="form-control" type="text" value=""> <label
+                                        class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">主表关联字段：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="main_field" class="form-control" type="text" value=""> <label
+                                        class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">关系表ID：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="relation_table" class="form-control" type="text" value=""> <label
+                                        class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">关系表关联字段：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="relation_field" class="form-control" type="text" value=""> <label
+                                        class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">多对多间接表：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="indirect_table" class="form-control" type="text" value=""> <label
+                                        class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">关系类型：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="type" class="ts-icheck" type="radio" value="1">　
+                                    一对一(HAS_ONE关联字段在关联表)　<input name="type" class="ts-icheck" type="radio" value="2">　
+                                    一对一或一对多(BELONGS_TO关联字段在主表)　<input name="type" class="ts-icheck" type="radio"
+                                                                      value="3">　
+                                    一对多(HAS_MANY关联字段在关联表)　<input name="type" class="ts-icheck" type="radio" value="4">　
+                                    多对多(MANY_TO_MANY关联字段在中间表)　 <label class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dd class="col-sm-offset-2 col-sm-10">
+                                    <input name="id" type="hidden" value="">
+                                    <button class="btn btn-info" type="submit">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        提交
+                                    </button>
+
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button class="btn" type="reset">
+                                        <i class="glyphicon glyphicon-repeat"></i>
+                                        重置
+                                    </button>
+                                </dd>
+                            </dl>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</div>

@@ -1,0 +1,170 @@
+﻿/**
+  数据库建表注释规则:
+  例如:`status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态:0-已删除,1-未激活,2-激活/radio'
+   1.先写字段表示的内容:状态(必须)
+   2.":"字段里的每个值对应的意思.:0-已删除(选填)
+   3."|"表示验证规则内容,如何验证参照jquery.validate,对应值有两个时用"\"分割.:|rangelength-6\\10,required(选填)
+   4."/"后面的表示表单类型,只能设置一个值,默认是text.:/radio;(选填)
+*/
+
+/* 数据库表信息 */
+CREATE TABLE `t_table` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `table` varchar(255) NOT NULL DEFAULT '' COMMENT '数据表|required,noNumber',
+  `alias` varchar(255) NOT NULL DEFAULT '' COMMENT '别名|required,noNumber',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '数据表名称|required,noNumber',
+  `is_relation` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否为中间表:0-不是,1-是/radio',
+  `description` text NOT NULL COMMENT '描述/ueditor',
+  `sort` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序|number',
+  `ctime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间/time',
+  `utime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间/time',
+  `status` tinyint(3) NOT NULL DEFAULT '1' COMMENT '状态:0-已删除,1-正常/radio',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='数据表';
+
+/* 数据库表与表之间联系 */
+CREATE TABLE `t_table` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `table` varchar(255) NOT NULL DEFAULT '' COMMENT '数据表|required,noNumber',
+  `alias` varchar(255) NOT NULL DEFAULT '' COMMENT '别名|required,noNumber',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '数据表名称|required,noNumber',
+  `is_relation` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '是否为中间表:0-不是,1-是/radio',
+  `description` text NOT NULL COMMENT '描述/ueditor',
+  `sort` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序|number',
+  `ctime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间/time',
+  `utime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间/time',
+  `status` tinyint(3) NOT NULL DEFAULT '1' COMMENT '状态:0-已删除,1-正常/radio',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COMMENT='数据表';
+
+/* 用户表 */
+CREATE TABLE `t_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+  `uname` varchar(255) NOT NULL DEFAULT '' COMMENT '用户名|required',
+  `password` char(32) NOT NULL DEFAULT '' COMMENT '密码|rangelength-6\\18,required',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '姓名|minlength-3,noNumber',
+  `email` varchar(255) NOT NULL DEFAULT '' COMMENT '电子邮箱|email,required',
+  `phone` varchar(20) NOT NULL DEFAULT '' COMMENT '手机号码|required',
+  `head_portrait` varchar(255) NOT NULL DEFAULT '' COMMENT '头像/img',
+  `key` char(4) NOT NULL DEFAULT '' COMMENT '随机数key',
+  `type` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '用户类型:0-普通用户,1-管理员用户',
+  `ctime` int(11) NOT NULL DEFAULT '0' COMMENT '创建时间/time',
+  `utime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间/time',
+  `ip` varchar(255) NOT NULL DEFAULT '' COMMENT '登录IP地址',
+  `integral` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户积分|number',
+  `status` tinyint(4) NOT NULL DEFAULT '2' COMMENT '状态:0-已删除,1-激活,2-未激活,3-禁用/radio',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`),
+  UNIQUE KEY `uname` (`uname`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='用户信息';
+
+
+
+/* 管理员 */
+CREATE TABLE `t_admin_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id|required,number',
+  `ctime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间/time',
+  `utime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间/time',
+  `status` tinyint(3) NOT NULL DEFAULT '1' COMMENT '状态:0-已删除,1-正常,2-禁用',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='管理员';
+
+
+/* 角色 */
+CREATE TABLE `t_role` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '角色id',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '名称|required',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述/textarea',
+  `ctime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间/time',
+  `utime` int(11) NOT NULL DEFAULT '0' COMMENT '修改时间/time',
+  `status` tinyint(3) NOT NULL DEFAULT '1' COMMENT '状态:0-已删除,1-正常/radio',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='角色';
+
+
+/* 权限 */
+CREATE TABLE `t_power` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '权限id',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '权限名称|required',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '权限url地址|required',
+  `description` varchar(255) NOT NULL DEFAULT '' COMMENT '描述/textarea',
+  `deep` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '层级|number',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父id|number',
+  `lft` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '左边界',
+  `rght` int(11) NOT NULL DEFAULT '0' COMMENT '右边界',
+  `ctime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间/time',
+  `utime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间/time',
+  `status` int(11) NOT NULL DEFAULT '1' COMMENT '状态:0-已删除,1-正常,2-不显示',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='权限';
+
+
+/* 角色-权限 */
+CREATE TABLE `t_role_power` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '权限id',
+  `rid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id|number',
+  `pid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '权限列表id|number',
+  PRIMARY KEY (`id`),
+  KEY `uid` (`rid`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='角色权限关联表';
+
+
+/* 后台用户-角色 */
+CREATE TABLE `t_admin_user_role` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `a_u_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '后台用户id|number',
+  `rid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '角色id|number',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='后台用户角色关联表';
+
+
+
+/* 管理员操作日志 */
+CREATE TABLE `t_admin_user_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `model` varchar(255) NOT NULL DEFAULT '',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '访问地址',
+  `get` text NOT NULL COMMENT 'get参数JSON格式',
+  `post` text NOT NULL COMMENT 'post参数JSON化',
+  `code` tinyint(4) NOT NULL DEFAULT '9' COMMENT '结果状态码:0-成功,负1-失败,负2-没有数据,1-参数错误,2-提示信息,3-警告信息,9-未返回code',
+  `msg` varchar(255) NOT NULL DEFAULT '' COMMENT '结果返回消息',
+  `ip` varchar(255) NOT NULL DEFAULT '' COMMENT '访问ip',
+  `return` text NOT NULL COMMENT '结果返回',
+  `ctime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `status` tinyint(3) NOT NULL DEFAULT '1' COMMENT '状态:0-已删除,1-正常/radio',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='管理员操作日志';
+
+/* 系统日志表 */
+CREATE TABLE `t_system_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `uid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '用户id',
+  `model` varchar(255) NOT NULL DEFAULT '',
+  `url` varchar(255) NOT NULL DEFAULT '' COMMENT '访问地址',
+  `get` text NOT NULL COMMENT 'get参数JSON格式',
+  `post` text NOT NULL COMMENT 'post参数JSON化',
+  `code` tinyint(4) NOT NULL DEFAULT '9' COMMENT '结果状态码:0-成功,负1-失败,负2-没有数据,负3-系统错误,1-参数错误,2-提示信息,3-警告信息,9-未返回code',
+  `msg` text NOT NULL COMMENT '结果返回消息',
+  `ip` varchar(255) NOT NULL DEFAULT '' COMMENT '访问ip',
+  `return` text NOT NULL COMMENT '结果返回',
+  `ctime` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
+  `status` tinyint(3) NOT NULL DEFAULT '1' COMMENT '状态:0-已删除,1-正常/radio',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8 COMMENT='系统错误日志';
+
+/* 城市区域表 */
+CREATE TABLE `t_city` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(255) NOT NULL DEFAULT '' COMMENT '名称|required',
+  `deep` smallint(5) unsigned NOT NULL DEFAULT '1' COMMENT '层级',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父id|number/tree',
+  `lft` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '左边界',
+  `rght` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '右边界',
+  `ctime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间/time',
+  `utime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '修改时间/time',
+  `status` tinyint(3) NOT NULL DEFAULT '1' COMMENT '状态:0-已删除,1-正常',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8 COMMENT='城市';
+

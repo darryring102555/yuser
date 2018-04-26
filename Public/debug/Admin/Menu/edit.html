@@ -1,0 +1,107 @@
+<div class="ts-container">
+    <section class="content-header">
+        <h1>
+            菜单
+            <small>信息编辑</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{'U' | F:'Index/index'}}"><i class="fa fa-heart"></i> 个人中心</a></li>
+            <li><a href="{{'U' | F:'index'}}"><i class="fa fa-list-alt"></i> 菜单管理</a></li>
+            <li><a href="#"><i class="fa {{data['id'] ? 'fa-edit': 'fa-plus' }}"></i> {{data['id'] ? '修改': '添加' }}菜单</a></li>
+            <li class="active">Data row</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <i class="ion ion-clipboard"></i>
+
+                        <h3 class="box-title">编辑表单</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <form class="form-horizontal" action="{{'U' | F:'doEdit'}}" id="edit" method="get">
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">权限名称：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="name" class="form-control" type="text" value=""> <label
+                                        class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">权限url地址：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="url" class="form-control" type="text" value=""> <label
+                                        class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">图标：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="icons" class="form-control" type="text" value=""> <label
+                                        class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">描述：</dt>
+                                <dd class="col-sm-10">
+                                    <textarea name="description" class="form-control" placeholder="请输入..."
+                                              rows="4"></textarea>
+                                    <label class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">父id：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="parent_id" class="ts-tree" type="hidden" value="">
+                                    <input name="old_parent_id" type="hidden" value="">
+                                    <ul id="tree" class="ztree" style="width:229px; overflow:auto;"></ul>
+                                    <label class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+
+                            {{if (data.deep<3 && data.deep>0)  || !data.id}}
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">是否显示：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="status" class="ts-icheck" type="radio" value="1">　
+                                    是　<input name="status" class="ts-icheck" type="radio" value="2">　
+                                    否
+                                    <label class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            {{/if}}
+                            <dl class="clearfix form-group">
+                                <dd class="col-sm-offset-2 col-sm-10">
+                                    <input name="id" type="hidden" value="">
+                                    <button class="btn btn-info" type="submit">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        提交
+                                    </button>
+
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button class="btn" type="reset">
+                                        <i class="glyphicon glyphicon-repeat"></i>
+                                        重置
+                                    </button>
+                                </dd>
+                            </dl>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</div>

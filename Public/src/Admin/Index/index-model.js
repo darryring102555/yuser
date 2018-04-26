@@ -1,0 +1,1 @@
+define([],function(){function d(b){for(var c in a)b=a[c](b);return b}var a={total:function(a){var c,b=0;for(c in a.data)b+=100*a.data[c]["price"]*a.data[c]["quantity"];return a.total=b/100,a},ss:function(a){return a.totals=89999999,a}},b={},c={M:b,disposeData:d};return c});

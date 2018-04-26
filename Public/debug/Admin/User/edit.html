@@ -1,0 +1,207 @@
+<div class="ts-container">
+    <section class="content-header">
+        <h1>
+            用户
+            <small>信息</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{'U' | F:'Admin/User/index'}}"><i class="fa fa-users"></i> 用户管理</a></li>
+            <li><a href="#"><i class="fa {{data['id'] ? 'fa-edit': 'fa-plus' }}"></i> {{data['id'] ? '修改': '添加' }}用户</a></li>
+            <li class="active">Data row</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <i class="ion ion-clipboard"></i>
+                    <h3 class="box-title">编辑表单</h3>
+                </div>
+                <form class="form-horizontal"  action="{{'U' | F:'doEdit'}}" id="edit" method="get">
+                    <div class="box-body">
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">用户id：</dt>
+                            <dd class="col-sm-10">
+                                <input name="uid" class="form-control" type="text" value="">
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        {{if data.id<1}}
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">密码：</dt>
+                            <dd class="col-sm-10">
+                                <input name="password" class="form-control" type="password" value="">
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        {{/if}}
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">姓名：</dt>
+                            <dd class="col-sm-10">
+                                <input name="name" class="form-control" type="text" value="">
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">电子邮箱：</dt>
+                            <dd class="col-sm-10">
+                                <input name="email" class="form-control" type="text" value="">
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">手机号码：</dt>
+                            <dd class="col-sm-10">
+                                <input name="phone" class="form-control" type="text" value="">
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        {{if data.id>0}}
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">头像：</dt>
+                            <dd class="col-sm-10">
+                                <img url="{{'_IMG_' | C}}">
+                                <input type="hidden" class="ts-img" name="head_portrait" value="" data-width="210"
+                                       data-height="295"/>
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        {{/if}}
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">相册：</dt>
+                            <dd class="col-sm-10">
+                                <img url="{{'_IMG_' | C}}">
+                                <input type="hidden" class="ts-imgs" name="photos[]" value="" data-width="210"
+                                       data-height="295"/>
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">详情：</dt>
+                            <dd class="col-sm-10">
+                              <div id="ts-editor" data-name="detail" style="width:100%;"></div>
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">用户类型：</dt>
+                            <dd class="col-sm-10">
+                                <input name="type" class="ts-icheck" checked="checked" type="radio" value="0">　
+                                普通用户　<input name="type" class="ts-icheck" type="radio" value="1">　
+                                管理员用户
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">用户类型：</dt>
+                            <dd class="col-sm-10">
+                                <input name="type1" class="ts-icheck" checked="checked" type="checkbox" value="0">　
+                                普通用户　<input name="type1" class="ts-icheck" type="checkbox" value="1">　
+                                管理员用户
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">用户积分：</dt>
+                            <dd class="col-sm-10">
+                                <div class="input-group my-colorpicker2" style="max-width:250px;">
+                                    <input type="text" class="form-control">
+                                    <div class="input-group-addon">
+                                        <i></i>
+                                    </div>
+                                </div>
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">用户积分：</dt>
+                            <dd class="col-sm-10">
+                                <input type="text" class="input-mini ts-number"   min="0" step="2" max="9"/>
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">用户积分：</dt>
+                            <dd class="col-sm-10">
+                                <select class="form-control select2">
+                                    <option selected="selected">Alabama</option>
+                                    <option>Alaska</option>
+                                    <option disabled="disabled">California (disabled)</option>
+                                    <option>Delaware</option>
+                                    <option>Tennessee</option>
+                                    <option>Texas</option>
+                                    <option>Washington</option>
+                                </select>
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dt class="col-sm-2 control-label">用户积分：</dt>
+                            <dd class="col-sm-10">
+                                <label>
+                                    <input name="switch-field-1" class="ace ace-switch ace-switch-2" type="checkbox" />
+                                    <span class="lbl"></span>
+                                </label>
+                                <label>
+                                    <input name="switch-field-1" class="ace ace-switch ace-switch-3" type="checkbox" />
+                                    <span class="lbl"></span>
+                                </label>
+                                <label>
+                                    <input name="switch-field-1" class="ace ace-switch ace-switch-4" type="checkbox" />
+                                    <span class="lbl"></span>
+                                </label>
+                                <label>
+                                    <input name="switch-field-1" class="ace ace-switch ace-switch-5" type="checkbox" />
+                                    <span class="lbl"></span>
+                                </label>
+                                <label>
+                                    <input name="switch-field-1" class="ace ace-switch ace-switch-6" type="checkbox" />
+                                    <span class="lbl"></span>
+                                </label>
+                                <label>
+                                    <input name="switch-field-1" class="ace ace-switch ace-switch-7" type="checkbox" />
+                                    <span class="lbl"></span>
+                                </label>
+                                <label class="field_info control-label">验证提示</label>
+                                <label class="error_message control-label"></label>
+                            </dd>
+                        </dl>
+                        <dl class="clearfix form-group">
+                            <dd class="col-sm-offset-2 col-sm-10">
+                                <input name="id" type="hidden" value="">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="glyphicon glyphicon-ok"></i>
+                                    提交
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="glyphicon glyphicon-repeat"></i>
+                                    重置
+                                </button>
+                            </dd>
+                        </dl>
+
+                    </div><!-- /.box-body -->
+                </form>
+            </div>
+
+            </div>
+        </div>
+
+    </section>
+</div>

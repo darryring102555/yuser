@@ -1,0 +1,14 @@
+<html><head>
+    <meta http-equiv="Content-Language" content="zh-cn"/>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+</head>
+<body>
+<div style="width:60%;padding:30px 20px;background:#F9F9F9;">
+    <span style="font-weight:bold;font-size:16px;">Hi,{$uname}</span><br/>
+    欢迎您注册<b>XXX公司网站</b><br/>
+    请点击下面的连接完成注册(有效期一小时):http://www.{$Think.HOST}{:U('/Home/Login/active',array('id'=>$id,'key'=>$key))}<br/>
+    <br/>
+</div>
+</body>
+
+</html>

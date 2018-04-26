@@ -1,0 +1,15 @@
+<block name="require">
+define(['jquery','common'],function(j,f){
+</block>
+    var  bind = {};
+    <block name="countent"></block>
+
+    function init(){
+        for(var i in bind){
+            bind[i]();
+        }
+    }
+    return {
+        init:init
+    };
+});

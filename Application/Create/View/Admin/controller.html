@@ -1,0 +1,46 @@
+<extend name="Public:controller" />
+<block name="countent">
+    /* 数据模型 */
+    protected $model_name = '<{$M_name}>/<{$model_name}>';
+
+    /* 编辑显示数据前 */
+    protected function editShowBefore(&$data){
+        $this->setTitle("<{$comment['table_comment']}>");
+    <foreach name="comment['field']" item="row" key="k" >
+        <if condition="$row['type'] eq 'imgs'">
+            $data['<{$k}>'] = $data['<{$k}>'] ? json_decode($data['<{$k}>'],true) : array();
+            <elseif condition="$row['type'] eq 'time'"/>
+            $data['<{$k}>'] = date('Y-m-d H:i:s',$data['<{$k}>']);
+            <elseif condition="$row['type'] eq 'tree'"/>
+            $this->assigns('tree',D($this->model_name)->getAllChilds());
+            <elseif condition="$row['type'] eq 'checkbox'"/>
+            $data['<{$k}>'] = getCheckboxNum($data['<{$k}>']);
+        </if>
+    </foreach>
+    }
+
+    protected function doEditSaveBefore(&$save){
+        $save = $this->request;
+        <foreach name="comment['field']" item="row" key="k" >
+            <if condition="$row['type'] eq 'ueditor'">
+            $save['<{$k}>'] = I('request.<{$k}>','','stripslashes');
+                <elseif condition="$row['type'] eq 'checkbox'"/>
+                $save['<{$k}>'] = checkboxNum($this->request['<{$k}>']);
+            </if>
+        </foreach>
+    }
+
+
+
+
+    protected function doEditAddBefore(&$save){
+        $save = $this->request;
+        <foreach name="comment['field']" item="row" key="k" >
+            <if condition="$row['type'] eq 'ueditor'">
+                $save['<{$k}>'] = I('request.<{$k}>','','stripslashes');
+                <elseif condition="$row['type'] eq 'checkbox'"/>
+                $save['<{$k}>'] = checkboxNum($this->request['<{$k}>']);
+            </if>
+        </foreach>
+    }
+</block>

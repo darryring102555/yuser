@@ -1,0 +1,88 @@
+<div class="ts-container">
+    <section class="content-header">
+        <h1>
+            角色
+            <small>信息编辑</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="{{'U' | F:'Index/index'}}"><i class="fa fa-users"></i> 用户管理</a></li>
+            <li><a href="{{'U' | F:'index'}}"><i class="fa fa-users"></i> 权限管理</a></li>
+            <li><a href="#"><i class="fa {{data['id'] ? 'fa-edit': 'fa-plus' }}"></i> {{data['id'] ? '修改': '添加' }}权限</a></li>
+            <li class="active">Data row</li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <i class="ion ion-clipboard"></i>
+
+                        <h3 class="box-title">编辑表单</h3>
+                    </div>
+
+                    <div class="box-body">
+                        <form class="form-horizontal" action="{{'U' | F:'doEdit'}}" id="edit" method="get">
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">名称：</dt>
+                                <dd class="col-sm-10">
+                                    <input name="name" class="form-control" type="text" value=""> <label
+                                        class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">描述：</dt>
+                                <dd class="col-sm-10">
+                                    <textarea name="description" class="form-control" placeholder="请输入..."
+                                              rows="4"></textarea>
+                                    <label class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dt class="col-sm-2 control-label">角色权限：</dt>
+                                <dd class="col-sm-10 permission_list">
+                                    {{each power as row i}}
+                                    {{if i==0 || (i>0 && row.deep!=power[i-1]['deep'])}}
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                        {{'deep' | F:row.deep}}
+                                    {{/if}}
+                                            <input data-lft="{{row.lft}}" data-rght="{{row.rght}}" name="power_ids[]" {{if data.id==1}}disabled="disabled"{{/if}} value="{{row.id}}" type="checkbox">
+                                            <span>{{row.name}}</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            {{if power.length-1==i || row.deep>power[i+1]['deep']}}
+                                        </div>
+                                    </div>
+                                    {{/if}}
+                                    {{/each}}
+                                    <label class="field_info control-label">验证提示</label>
+                                    <label class="error_message control-label"></label>
+                                </dd>
+                            </dl>
+                            <dl class="clearfix form-group">
+                                <dd class="col-sm-offset-2 col-sm-10">
+                                    <input name="id" type="hidden" value="">
+                                    <button class="btn btn-info" type="submit">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                        提交
+                                    </button>
+
+                                    &nbsp; &nbsp; &nbsp;
+                                    <button class="btn" type="reset">
+                                        <i class="glyphicon glyphicon-repeat"></i>
+                                        重置
+                                    </button>
+                                </dd>
+                            </dl>
+                        </form>
+                    </div>
+                    <!-- /.box-body -->
+
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</div>

@@ -1,0 +1,204 @@
+<extend name="Public:view"/>
+
+<section class="content-header">
+    <h1>
+        模型关系
+        <small>列表</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{'U' | F:'index'}}"><i class="fa fa-dashboard"></i> 创建代码</a></li>
+        <li><a href="#"><i class="fa fa-gg"></i> 模型结构</a></li>
+        <li class="active">Data tables</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <!-- /.box -->
+            <div class="box">
+                <div class="box-header row">
+                    <div class="col-sm-12">
+                        <h3 class="box-title">筛选条件</h3>
+                        <a class="btn btn-sm btn-default pull-right" href="{{'U' | F:'edit'}}">
+                            <i class="glyphicon glyphicon-plus"></i>
+                            添加模型关系 </a>
+                        <a class="btn btn-sm btn-default pull-right" style="margin-right: 10px;" href="{{'U' | F:'modelGraph'}}">
+                            <i class="glyphicon glyphicon-equalizer"></i>
+                            模型关系图 </a>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="dataTables_wrapper form-inline dt-bootstrap" id="example1_wrapper">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div id="example1_length" class="dataTables_length">
+                                    <form action="" method="get">
+                                        <select class="ts-search-field form-control input-sm">
+                                            <option value="id">ID</option>
+                                            <option value="main_table">主表ID</option>
+                                            <option value="main_field">主表关联字段</option>
+                                            <option value="relation_table">关系表ID</option>
+                                            <option value="relation_field">关系表关联字段</option>
+                                            <option value="indirect_table">多对多间接表</option>
+                                            <option value="type">关系类型</option>
+                                            <option value="ctime">创建时间</option>
+                                            <option value="utime">修改时间</option>
+                                            <option value="status">状态</option>
+                                        </select>
+                                        <select class="ts-search-type  form-control input-sm" name="where[id][0]">
+                                            <option value="eq">=</option>
+                                            <option value="gt">&gt;</option>
+                                            <option value="lt">&lt;</option>
+                                            <option value="like">像</option>
+                                        </select>
+                                        <input name="where[id][1]" class="form-control input-sm ts-search-value"
+                                               placeholder="请输入搜索关键字" value="" type="search">
+                                        <button class="btn btn-sm btn-default ts-search-clear" type="button">
+                                            <i class="glyphicon glyphicon-repeat"></i>清空
+                                        </button>
+                                        <button class="btn btn-sm btn-primary ts-search" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>搜索
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <form action="" method="get" class="data-list">
+                                    <table class="table table-hover table-bordered table-striped">
+                                        <tr class="active">
+                                            <th style="width: 30px;"><input class="select-all" type="checkbox" value="">
+                                            </th>
+                                            <th data-filed="id" class="ts-order"
+                                                data-order="{{if order.id!='desc'}}desc{{else}}asc{{/if}}">
+                                                ID <a>{{if order.id=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="main_table" class="ts-order"
+                                                data-order="{{if order.main_table!='desc'}}desc{{else}}asc{{/if}}">
+                                                主表ID <a>{{if order.main_table=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="main_field" class="ts-order"
+                                                data-order="{{if order.main_field!='desc'}}desc{{else}}asc{{/if}}">
+                                                主表关联字段 <a>{{if order.main_field=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="relation_table" class="ts-order"
+                                                data-order="{{if order.relation_table!='desc'}}desc{{else}}asc{{/if}}">
+                                                关系表ID <a>{{if order.relation_table=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="relation_field" class="ts-order"
+                                                data-order="{{if order.relation_field!='desc'}}desc{{else}}asc{{/if}}">
+                                                关系表关联字段 <a>{{if order.relation_field=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="indirect_table" class="ts-order"
+                                                data-order="{{if order.indirect_table!='desc'}}desc{{else}}asc{{/if}}">
+                                                多对多间接表 <a>{{if order.indirect_table=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="type" class="ts-order"
+                                                data-order="{{if order.type!='desc'}}desc{{else}}asc{{/if}}">
+                                                关系类型 <a>{{if order.type=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="ctime" class="ts-order"
+                                                data-order="{{if order.ctime!='desc'}}desc{{else}}asc{{/if}}">
+                                                创建时间 <i class="glyphicon glyphicon-time"></i>
+                                                <a>{{if order.ctime=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="utime" class="ts-order"
+                                                data-order="{{if order.utime!='desc'}}desc{{else}}asc{{/if}}">
+                                                修改时间 <i class="glyphicon glyphicon-time"></i>
+                                                <a>{{if order.utime=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th data-filed="status" class="ts-order"
+                                                data-order="{{if order.status!='desc'}}desc{{else}}asc{{/if}}">
+                                                状态 <a>{{if order.status=='desc'}}▼{{else}}▲{{/if}}</a>
+                                            </th>
+                                            <th style="width: 90px">操作</th>
+                                        </tr>
+                                        {{each list as row i}}
+                                        <tr>
+                                            <td><input name="id[]" type="checkbox" value="{{row.id}}"></td>
+                                            <td>
+                                                {{row.id}}
+                                            </td>
+                                            <td>
+                                                {{row.main_table}}
+                                            </td>
+                                            <td>
+                                                {{row.main_field}}
+                                            </td>
+                                            <td>
+                                                {{row.relation_table}}
+                                            </td>
+                                            <td>
+                                                {{row.relation_field}}
+                                            </td>
+                                            <td>
+                                                {{row.indirect_table}}
+                                            </td>
+                                            <td>
+                                                {{if 0==1}}
+                                                {{else if row.type==1}}
+                                                一对一(HAS_ONE关联字段在关联表){{else if row.type==2}}
+                                                一对一或一对多(BELONGS_TO关联字段在主表){{else if row.type==3}}
+                                                一对多(HAS_MANY关联字段在关联表){{else if row.type==4}}
+                                                多对多(MANY_TO_MANY关联字段在中间表) {{else}}
+                                                其它
+                                                {{/if}}
+                                            <td>
+                                                {{'dateFormat' | F:row.ctime,'yyyy-MM-dd hh:mm:ss'}}
+                                            </td>
+                                            <td>
+                                                {{'dateFormat' | F:row.utime,'yyyy-MM-dd hh:mm:ss'}}
+                                            </td>
+                                            <td>
+                                                {{if row.status<1}}
+                                                <span class="label label-default">已删除</span>
+                                                {{else if row.status==0}}
+                                                <span class="label label-primary">已删除</span>{{else if row.status==1}}
+                                                <span class="label label-primary">正常</span> {{else}}
+                                                <span class="label label-warning">其它</span>
+                                                {{/if}}
+                                            <td>
+                                                <a class="btn btn-xs btn-info" href="{{'U' | F:'edit'}}?id={{row.id}}"
+                                                   role="button">
+                                                    <i class="glyphicon glyphicon-edit"></i>
+                                                </a>
+                                                &nbsp;&nbsp;
+                                                <button class="btn btn-xs btn-danger ts-remove" type="button"
+                                                        id="{{row.id}}">
+                                                    <i class="glyphicon glyphicon-trash"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button class="btn btn-danger btn-sm ts-remove-select" type="button">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                    删除选中
+                                </button>
+                                <button class="btn btn-sm btn-success ts-refresh" data-loading-text="Loading..."
+                                        type="button">
+                                    <i class="glyphicon glyphicon-refresh"></i>
+                                    刷新
+                                </button>
+                                {{include './page'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>

@@ -1,0 +1,24 @@
+<div class="spin-cont">
+    <table class="table table-hover table-bordered">
+        <tr class="active">
+            <th>用户名</th>
+            <th>姓名</th>
+        </tr>
+        {{if list.length}}
+        {{each list as row i}}
+        <tr>
+            <td>{{row.uname}}</td>
+            <td>{{row.name}}</td>
+        </tr>
+        {{/each}}
+        {{else}}
+        <tr>
+            <td colspan="2">暂时还没有成员</td>
+        </tr>
+        {{/if}}
+    </table>
+</div>
+
+
+
+

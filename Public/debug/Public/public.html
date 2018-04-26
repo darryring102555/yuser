@@ -1,0 +1,86 @@
+<!--弹窗模板-->
+<script id="dialog" type="text/html">
+    <div class="self {{if !shade}}dialog-close{{/if}}">
+        <div style="display: block;" class="modal fade in">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close close-self">
+                            <i class="icon fa fa-close" ></i>
+                        </button>
+                        <h4 class="modal-title">{{#title}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        {{#content}}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default close-self">关闭</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {{if shade}}
+        <div class="modal-backdrop fade in"></div>
+        {{/if}}
+    </div>
+</script>
+
+
+<script id="alt" type="text/html">
+        <div class="modal-dialog self ts-alert">
+            <div class="alert alert-{{if code==0}}success
+        {{else if code==3 || code==1}}warning
+        {{else}}info
+        {{/if}}">
+                <button type="button" class="close close-self">
+                    <i class="icon fa fa-close" ></i>
+                </button>
+            <span>
+                <h4>
+                    {{if code==0}}
+                    <i class="icon fa fa-check"></i>提示:
+                    {{else if code==3}}
+                    <i class="icon fa fa-warning"></i>警告:
+                    {{else}}
+                    <i class="icon fa fa-close"></i>提示:
+                    {{/if}}
+                </h4>
+                <p>{{#msg}}</p>
+            </span>
+            </div>
+        </div>
+</script>
+
+<script type="text/html" id="page">
+    总共{{pageCount}}页
+    <ul class="pagination" style="float: right;margin: 0px;">
+        <li
+        {{if page==1}}class="disabled"{{/if}}><a href="#" aria-label="Previous"><span
+            aria-hidden="true">«</span></a></li>
+        {{if (page-2)>0}}
+        <li><a href="#">{{page-2}}</a></li>
+        {{/if}}
+        {{if (page-1)>0}}
+        <li><a href="#">{{page-1}}</a></li>
+        {{/if}}
+        <li class="active"><a href="#">{{page}}</a></li>
+        {{if (page+1)<=pageCount}}
+        <li><a href="">{{page+1}}</a></li>
+        {{/if}}
+        {{if (page+2)<=pageCount}}
+        <li><a href="#">{{page+2}}</a></li>
+        {{/if}}
+        <li
+        {{if page==pageCount}}class="disabled"{{/if}}><a href="#" aria-label="Next"><span
+            aria-hidden="true">»</span></a></li>
+    </ul>
+
+</script>
+
+
+
+
+
+
